@@ -1,0 +1,13 @@
+<h1>Dental Clinic Management System</h1>
+
+<label>Add to test table: </label>
+<br />
+<input [formControl]="inputData" />
+<br />
+<br />
+<button (click)="submit()">Submit</button>
+<br />
+<br />
+<br />
+<button (click)="getTestTable()">Refresh</button>
+<pre>{{ getData | async | json }}</pre>

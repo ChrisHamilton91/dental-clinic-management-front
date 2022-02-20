@@ -1,4 +1,6 @@
-# DentalClinicManagementFront
+# Dental Clinic Management System - Front End
+
+## CSI2132 Group 24
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.4.
 

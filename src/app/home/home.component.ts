@@ -19,7 +19,9 @@ export class HomeComponent implements OnInit {
   }
 
   submit() {
-    this.backend.addToTestTable(this.inputData.value);
+    this.backend
+      .addToTestTable(this.inputData.value)
+      .subscribe((_) => this.getTestTable());
   }
 
   getTestTable() {

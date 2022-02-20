@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -14,12 +15,12 @@ export class BackendService {
   }
 
   addToTestTable(data: string) {
-    this.http
+    return this.http
       .post(
         this.baseUrl + '/add-to-test-table',
         { data: data },
         { responseType: 'text' as const }
       )
-      .subscribe((res) => console.log(res));
+      .pipe(tap((res) => console.log(res)));
   }
 }

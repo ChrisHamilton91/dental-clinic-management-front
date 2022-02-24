@@ -9,8 +9,10 @@ import { BackendService } from '../services/backend.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  getData = new Observable();
+  data$ = new Observable();
   inputData = new FormControl('');
+  apiKey = new FormControl('');
+  response = '';
 
   constructor(private backend: BackendService) {}
 
@@ -20,11 +22,17 @@ export class HomeComponent implements OnInit {
 
   submit() {
     this.backend
-      .addToTestTable(this.inputData.value)
-      .subscribe((_) => this.getTestTable());
+      .addToTestTable(this.inputData.value, this.apiKey.value)
+      .subscribe({
+        next: (res) => {
+          this.response = res;
+          this.getTestTable();
+        },
+        error: (err) => (this.response = err.error + ' ' + err.message),
+      });
   }
 
   getTestTable() {
-    this.getData = this.backend.getTestTable();
+    this.data$ = this.backend.getTestTable();
   }
 }

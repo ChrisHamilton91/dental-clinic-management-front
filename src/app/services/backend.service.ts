@@ -14,12 +14,12 @@ export class BackendService {
     return this.http.get(this.baseUrl + '/get-test-table');
   }
 
-  addToTestTable(data: string) {
+  addToTestTable(data: string, apiKey: string) {
     return this.http
       .post(
         this.baseUrl + '/add-to-test-table',
         { data: data },
-        { responseType: 'text' as const }
+        { responseType: 'text' as const, headers: { 'api-key': apiKey } }
       )
       .pipe(tap((res) => console.log(res)));
   }

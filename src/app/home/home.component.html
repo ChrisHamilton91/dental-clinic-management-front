@@ -1,5 +1,10 @@
 <h1>Dental Clinic Management System</h1>
 
+<label>API key: </label>
+<br />
+<input [formControl]="apiKey" />
+<br />
+<br />
 <label>Add to test table: </label>
 <br />
 <input [formControl]="inputData" />
@@ -8,6 +13,10 @@
 <button (click)="submit()">Submit</button>
 <br />
 <br />
+<p>Response: {{ response }}</p>
 <br />
 <button (click)="getTestTable()">Refresh</button>
-<pre>{{ getData | async | json }}</pre>
+<pre>
+  <ng-container *ngIf="!(data$ | async)">Loading...</ng-container>
+  <ng-container *ngIf="(data$ | async)">{{ data$ | async | json }}</ng-container>
+</pre>

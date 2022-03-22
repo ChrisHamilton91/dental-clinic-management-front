@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { tap } from 'rxjs';
+import { Observable, Subscriber, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -22,5 +22,14 @@ export class BackendService {
         { responseType: 'text' as const, headers: { 'api-key': apiKey } }
       )
       .pipe(tap((res) => console.log(res)));
+  }
+
+  testApiKey(apiKey: string) {
+    return new Observable((observer) => {
+      setTimeout(() => {
+        observer.next(apiKey === 'foo');
+        observer.complete();
+      }, 5000);
+    });
   }
 }

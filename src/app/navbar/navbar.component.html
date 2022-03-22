@@ -3,7 +3,24 @@
     <img src="assets/logo-negative.png" class="logo" [routerLink]="['/home']" />
   </ng-template>
   <ng-template pTemplate="end">
-    <p style="display: inline">Api Key:&nbsp;&nbsp;</p>
-    <input type="text" pInputText />
+    <div class="flex-container">
+      <p style="display: inline">Api Key:&nbsp;&nbsp;</p>
+      <input type="text" pInputText [(ngModel)]="aks.apiKey" />
+      <div style="width: 1rem"></div>
+      <div class="testButtonContainer">
+        <p-button
+          class="testButton"
+          *ngIf="!testingKey"
+          label="Test"
+          styleClass="lessPadding fullWidth"
+          (click)="testApiKey()"
+          [pTooltip]="testTooltip"
+          tooltipPosition="left"
+          tooltipStyleClass="wideTooltip"
+        >
+        </p-button>
+        <i *ngIf="testingKey" class="pi pi-spin pi-spinner"></i>
+      </div>
+    </div>
   </ng-template>
 </p-menubar>

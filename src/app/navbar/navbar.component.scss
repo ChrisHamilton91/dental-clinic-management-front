@@ -6,3 +6,18 @@
 .logo:hover {
   filter: brightness(1.2);
 }
+
+.flex-container {
+  display: flex;
+  align-items: center;
+}
+
+.testButtonContainer {
+  display: flex;
+  width: 2.5rem;
+  justify-content: center;
+}
+
+.testButton {
+  flex-grow: 1;
+}

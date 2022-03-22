@@ -133,7 +133,7 @@
             pInputText
             formControlName="ssn"
           />
-          <label for="add-patient-dialog-ssn">SSN</label>
+          <label for="add-patient-dialog-ssn">SSN (Must be unique)</label>
         </span>
         <div class="p-error error-container">
           {{ ds.getErrorMessage("ssn") }}
@@ -157,11 +157,12 @@
       <!-- Date of birth -->
       <div class="form-control">
         <p-calendar
+          [style]="{ width: '100%' }"
           formControlName="date_of_birth"
           dateFormat="dd-mm-yy"
           [maxDate]="now"
-          view="month"
           appendTo="body"
+          placeholder="Date of Birth"
         ></p-calendar>
         <div class="p-error error-container">
           {{ ds.getErrorMessage("date_of_birth") }}

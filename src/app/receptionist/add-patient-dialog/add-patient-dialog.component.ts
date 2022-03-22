@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { genderNames } from 'src/schema/genders';
 import { provinceNames } from 'src/schema/provinces';
 import { AddPatientDialogService } from './add-patient-dialog.service';

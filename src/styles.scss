@@ -22,7 +22,9 @@ body {
   padding: 0.4rem 0.25rem;
 }
 
-.p-button.fullWidth {
+.p-button.fullWidth,
+.p-dropdown.fullWidth,
+.p-input.fullWidth {
   width: 100%;
   flex-grow: 1;
 }

@@ -31,4 +31,9 @@ export class AddPatientDialogService {
     if (errors['required']) return 'Required';
     return '';
   }
+
+  markAllAsDirty() {
+    for (const control of Object.values(this.form.controls))
+      control.markAsDirty();
+  }
 }

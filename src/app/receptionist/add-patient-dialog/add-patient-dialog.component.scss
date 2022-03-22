@@ -1,17 +1,24 @@
 .form {
   display: flex;
   flex-direction: row;
-  max-width: 70vw;
+  max-width: 50vw;
   flex-wrap: wrap;
+  justify-content: flex-start;
+  column-gap: 16px;
+  padding-bottom: 50px;
 }
 
-.form-input {
+.form-control {
   margin-top: 1.4rem;
-  flex-grow: 1;
+  width: 300px;
 }
 
 .error-container {
   min-height: 1.2rem;
   font-size: 0.7rem;
   padding-left: 12px;
+}
+
+input {
+  width: 100%;
 }

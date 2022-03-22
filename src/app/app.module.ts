@@ -16,6 +16,8 @@ import { SharedModule } from 'primeng/api';
 import { TooltipModule } from 'primeng/tooltip';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { TableModule } from 'primeng/table';
+import { InputTextModule } from 'primeng/inputtext';
 
 import { ReceptionistComponent } from './receptionist/receptionist.component';
 import { DentistComponent } from './dentist/dentist.component';
@@ -42,6 +44,8 @@ import { PatientComponent } from './patient/patient.component';
     FormsModule,
     TooltipModule,
     ToastModule,
+    TableModule,
+    InputTextModule,
   ],
   providers: [MessageService],
   bootstrap: [AppComponent],

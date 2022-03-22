@@ -6,11 +6,18 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonModule } from 'primeng/button';
+import { NavbarComponent } from './navbar/navbar.component';
+import { MenubarModule } from 'primeng/menubar';
+import { SharedModule } from 'primeng/api';
+import { ReceptionistComponent } from './receptionist/receptionist.component';
+import { DentistComponent } from './dentist/dentist.component';
+import { PatientComponent } from './patient/patient.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent],
+  declarations: [AppComponent, HomeComponent, NavbarComponent, ReceptionistComponent, DentistComponent, PatientComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -18,6 +25,8 @@ import { ButtonModule } from 'primeng/button';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ButtonModule,
+    MenubarModule,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

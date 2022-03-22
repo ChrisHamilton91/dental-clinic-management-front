@@ -1,0 +1,9 @@
+<p-menubar [model]="items">
+  <ng-template pTemplate="start">
+    <img src="assets/logo-negative.png" class="logo" [routerLink]="['/home']" />
+  </ng-template>
+  <ng-template pTemplate="end">
+    <p style="display: inline">Api Key:&nbsp;&nbsp;</p>
+    <input type="text" pInputText />
+  </ng-template>
+</p-menubar>

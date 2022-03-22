@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
+import { finalize } from 'rxjs';
 import { ApiKeyService } from '../services/api-key.service';
 import { BackendService } from '../services/backend.service';
 
@@ -14,18 +15,40 @@ export class NavbarComponent implements OnInit {
     { label: 'Dentist UI', routerLink: ['/dentist'] },
     { label: 'Patient UI', routerLink: ['/patient'] },
   ];
+
   testingKey = false;
   testTooltip = 'Ping the backend server to verify the api key.';
 
-  constructor(public aks: ApiKeyService, private bes: BackendService) {}
+  constructor(
+    public aks: ApiKeyService,
+    private bes: BackendService,
+    private ms: MessageService
+  ) {}
 
   ngOnInit(): void {}
 
   testApiKey() {
     this.testingKey = true;
-    this.bes.testApiKey(this.aks.apiKey).subscribe((res) => {
-      console.log(res);
-      this.testingKey = false;
-    });
+    this.bes
+      .testApiKey(this.aks.apiKey)
+      .pipe(finalize(() => (this.testingKey = false)))
+      .subscribe((res) => {
+        this.notifyOfKeyValidity(res as boolean);
+      });
+  }
+
+  notifyOfKeyValidity(valid: boolean) {
+    if (valid === true)
+      this.ms.add({
+        severity: 'success',
+        summary: 'Valid',
+        detail: 'The api key is valid!',
+      });
+    else
+      this.ms.add({
+        severity: 'error',
+        summary: 'Invalid',
+        detail: 'The api key is invalid...',
+      });
   }
 }

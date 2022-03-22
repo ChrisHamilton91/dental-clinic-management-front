@@ -15,6 +15,7 @@ import { MenubarModule } from 'primeng/menubar';
 import { SharedModule } from 'primeng/api';
 import { TooltipModule } from 'primeng/tooltip';
 import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 import { ReceptionistComponent } from './receptionist/receptionist.component';
 import { DentistComponent } from './dentist/dentist.component';
@@ -42,7 +43,7 @@ import { PatientComponent } from './patient/patient.component';
     TooltipModule,
     ToastModule,
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

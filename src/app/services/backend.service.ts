@@ -25,11 +25,8 @@ export class BackendService {
   }
 
   testApiKey(apiKey: string) {
-    return new Observable((observer) => {
-      setTimeout(() => {
-        observer.next(apiKey === 'foo');
-        observer.complete();
-      }, 5000);
+    return this.http.get(this.baseUrl + '/test-api-key', {
+      headers: { 'api-key': apiKey },
     });
   }
 }

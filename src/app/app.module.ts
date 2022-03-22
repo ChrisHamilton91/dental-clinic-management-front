@@ -20,6 +20,7 @@ import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
+import { CalendarModule } from 'primeng/calendar';
 
 import { ReceptionistComponent } from './receptionist/receptionist.component';
 import { DentistComponent } from './dentist/dentist.component';
@@ -52,6 +53,7 @@ import { AddPatientDialogComponent } from './receptionist/add-patient-dialog/add
     InputTextModule,
     DialogModule,
     DropdownModule,
+    CalendarModule,
   ],
   providers: [MessageService],
   bootstrap: [AppComponent],

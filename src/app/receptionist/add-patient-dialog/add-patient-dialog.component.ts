@@ -12,6 +12,7 @@ import { AddPatientDialogService } from './add-patient-dialog.service';
 export class AddPatientDialogComponent implements OnInit {
   provinces = provinceNames;
   genders = genderNames;
+  now = new Date();
 
   constructor(public ds: AddPatientDialogService) {}
 

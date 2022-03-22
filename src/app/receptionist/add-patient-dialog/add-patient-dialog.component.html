@@ -54,11 +54,12 @@
       <!-- Province -->
       <div class="form-control">
         <p-dropdown
-          styleClass="fullWidth"
+          [style]="{ width: '100%' }"
           placeholder="Province"
           [options]="provinces"
           formControlName="province"
           optionLabel="name"
+          appendTo="body"
         ></p-dropdown>
         <div class="p-error error-container">
           {{ ds.getErrorMessage("province") }}
@@ -112,11 +113,12 @@
       <!-- Gender -->
       <div class="form-control">
         <p-dropdown
-          styleClass="fullWidth"
+          [style]="{ width: '100%' }"
           placeholder="Gender"
           [options]="genders"
           formControlName="gender"
           optionLabel="name"
+          appendTo="body"
         ></p-dropdown>
         <div class="p-error error-container">
           {{ ds.getErrorMessage("gender") }}
@@ -152,23 +154,21 @@
           {{ ds.getErrorMessage("email") }}
         </div>
       </div>
-      <!-- date of birth -->
+      <!-- Date of birth -->
       <div class="form-control">
-        <span class="p-float-label">
-          <input
-            id="add-patient-dialog-date_of_birth"
-            type="text"
-            pInputText
-            formControlName="date_of_birth"
-          />
-          <label for="add-patient-dialog-date_of_birth">Date of Birth</label>
-        </span>
+        <p-calendar
+          formControlName="date_of_birth"
+          dateFormat="dd-mm-yy"
+          [maxDate]="now"
+          view="month"
+          appendTo="body"
+        ></p-calendar>
         <div class="p-error error-container">
-          {{ ds.getErrorMessage("province") }}
+          {{ ds.getErrorMessage("date_of_birth") }}
         </div>
       </div>
-    </form></ng-template
-  >
+    </form>
+  </ng-template>
 
   <ng-template pTemplate="footer">
     <button

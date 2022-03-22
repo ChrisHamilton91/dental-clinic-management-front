@@ -14,7 +14,7 @@
           class="testButton"
           *ngIf="!testingKey"
           label="Test"
-          styleClass="lessPadding fullWidth"
+          [style]="{ width: '100%', padding: '0.4rem 0.25rem;' }"
           (click)="testApiKey()"
           [pTooltip]="testTooltip"
           tooltipPosition="left"

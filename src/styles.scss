@@ -18,17 +18,6 @@ body {
   height: 100%;
 }
 
-.p-button.lessPadding {
-  padding: 0.4rem 0.25rem;
-}
-
-.p-button.fullWidth,
-.p-dropdown.fullWidth,
-.p-input.fullWidth {
-  width: 100%;
-  flex-grow: 1;
-}
-
 .p-tooltip.wideTooltip {
   max-width: 13rem;
 }

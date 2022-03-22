@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AddPatientDialogService } from './add-patient-dialog/add-patient-dialog.service';
 
 @Component({
   selector: 'app-receptionist',
@@ -38,6 +39,7 @@ export class ReceptionistComponent implements OnInit {
       email: 'hillary@pantSuit.com',
     },
   ];
+
   cols = [
     { field: 'patient_id', header: 'Patient ID' },
     { field: 'person_id', header: 'Person ID' },
@@ -49,7 +51,7 @@ export class ReceptionistComponent implements OnInit {
     { field: 'email', header: 'Email' },
   ];
 
-  constructor() {}
+  constructor(private addPatientDialog: AddPatientDialogService) {}
 
   ngOnInit(): void {}
 
@@ -62,6 +64,6 @@ export class ReceptionistComponent implements OnInit {
   }
 
   addNewPatient() {
-    console.log('Add Patient called');
+    this.addPatientDialog.visible = true;
   }
 }

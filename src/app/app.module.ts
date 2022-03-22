@@ -18,10 +18,12 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
+import { DialogModule } from 'primeng/dialog';
 
 import { ReceptionistComponent } from './receptionist/receptionist.component';
 import { DentistComponent } from './dentist/dentist.component';
 import { PatientComponent } from './patient/patient.component';
+import { AddPatientDialogComponent } from './receptionist/add-patient-dialog/add-patient-dialog.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { PatientComponent } from './patient/patient.component';
     ReceptionistComponent,
     DentistComponent,
     PatientComponent,
+    AddPatientDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +49,7 @@ import { PatientComponent } from './patient/patient.component';
     ToastModule,
     TableModule,
     InputTextModule,
+    DialogModule,
   ],
   providers: [MessageService],
   bootstrap: [AppComponent],

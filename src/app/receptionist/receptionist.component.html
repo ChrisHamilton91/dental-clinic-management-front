@@ -1,6 +1,6 @@
 <div class="container">
   <div class="table-container">
-    <p-table [value]="data" [rowHover]="true">
+    <p-table [value]="(patients | async) || []" [rowHover]="true">
       <ng-template pTemplate="caption">
         <div class="table-header">
           <span>Patients</span>

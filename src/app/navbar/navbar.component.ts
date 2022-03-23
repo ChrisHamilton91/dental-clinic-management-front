@@ -30,10 +30,10 @@ export class NavbarComponent implements OnInit {
   testApiKey() {
     this.testingKey = true;
     this.bes
-      .testApiKey(this.aks.apiKey)
+      .testApiKey()
       .pipe(finalize(() => (this.testingKey = false)))
       .subscribe((res) => {
-        this.notifyOfKeyValidity(res as boolean);
+        this.notifyOfKeyValidity(res);
       });
   }
 

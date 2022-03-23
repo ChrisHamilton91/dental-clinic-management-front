@@ -1,3 +1,7 @@
-<app-navbar></app-navbar>
+<app-navbar style="z-index: 99"></app-navbar>
 <div class="spacer"></div>
 <router-outlet></router-outlet>
+
+<p-toast [baseZIndex]="100"></p-toast>
+
+<div class="waiting-overlay" *ngIf="ws.waiting"></div>

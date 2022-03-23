@@ -5,6 +5,8 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
+import * as moment from 'moment';
+import { IPersonInfo } from 'src/schema/person';
 
 @Injectable({
   providedIn: 'root',
@@ -106,5 +108,16 @@ export class AddPatientDialogService {
     if (errors['min']) return 'Must be greater than 0.';
     if (errors['max']) return 'Must be less than 999999999.';
     return 'Invalid Input';
+  }
+
+  getFormOutput(): IPersonInfo {
+    return {
+      ...this.form.getRawValue(),
+      province: this.form.controls['province'].value.name,
+      gender: this.form.controls['gender'].value.name,
+      date_of_birth: moment(this.form.controls['date_of_birth'].value)
+        .utc()
+        .format('YYYY-MM-DD'),
+    };
   }
 }

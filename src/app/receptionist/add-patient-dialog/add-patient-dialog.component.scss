@@ -1,7 +1,6 @@
 .form {
   display: flex;
   flex-direction: row;
-  max-width: 50vw;
   flex-wrap: wrap;
   justify-content: flex-start;
   column-gap: 16px;
@@ -20,4 +19,14 @@
 
 input {
   width: 100%;
+}
+
+.footer-container {
+  display: flex;
+  align-items: flex-start;
+}
+
+.footer-error {
+  width: calc(100% - 12rem);
+  text-align: start;
 }

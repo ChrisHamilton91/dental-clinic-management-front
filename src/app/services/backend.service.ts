@@ -54,7 +54,7 @@ export class BackendService {
                 ...el,
                 date_of_birth: moment(el.date_of_birth, true)
                   .utc()
-                  .format('DD-MM-YYYY'),
+                  .format('YYYY-MM-DD'),
               };
             }))
         )

@@ -28,6 +28,7 @@ import { PatientComponent } from './patient/patient.component';
 import { AddPatientDialogComponent } from './receptionist/add-patient-dialog/add-patient-dialog.component';
 import { EditPatientDialogComponent } from './receptionist/edit-patient-dialog/edit-patient-dialog.component';
 import { AddPatientAptDialogComponent } from './receptionist/add-patient-apt-dialog/add-patient-apt-dialog.component';
+import { ManagerComponent } from './manager/manager.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { AddPatientAptDialogComponent } from './receptionist/add-patient-apt-dia
     AddPatientDialogComponent,
     EditPatientDialogComponent,
     AddPatientAptDialogComponent,
+    ManagerComponent,
   ],
   imports: [
     BrowserModule,

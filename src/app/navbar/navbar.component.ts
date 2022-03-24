@@ -14,6 +14,7 @@ export class NavbarComponent implements OnInit {
     { label: 'Receptionist UI', routerLink: ['/receptionist'] },
     { label: 'Dentist UI', routerLink: ['/dentist'] },
     { label: 'Patient UI', routerLink: ['/patient'] },
+    { label: 'Manager UI', routerLink: ['/manager'] },
   ];
 
   testingKey = false;

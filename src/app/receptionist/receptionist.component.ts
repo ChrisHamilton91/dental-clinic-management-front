@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { finalize, Observable, Subscription } from 'rxjs';
 import { BackendService } from '../services/backend.service';
+import { LoadingNotificationService } from '../services/loading-notification.service';
 import { AddPatientDialogService } from './add-patient-dialog/add-patient-dialog.service';
 import { ReceptionistTableService } from './receptionist-table.service';
 
@@ -26,7 +27,8 @@ export class ReceptionistComponent implements OnInit, OnDestroy {
   constructor(
     private addPatientDialog: AddPatientDialogService,
     private bes: BackendService,
-    private rrts: ReceptionistTableService
+    private rrts: ReceptionistTableService,
+    private lns: LoadingNotificationService
   ) {}
 
   ngOnInit(): void {
@@ -41,7 +43,10 @@ export class ReceptionistComponent implements OnInit, OnDestroy {
   }
 
   refreshPatients() {
-    this.patients = this.bes.getAllPatients();
+    this.lns.show();
+    this.patients = this.bes
+      .getAllPatients()
+      .pipe(finalize(() => this.lns.hide()));
   }
 
   editPatient(p: any) {

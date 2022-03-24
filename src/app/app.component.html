@@ -3,5 +3,13 @@
 <router-outlet></router-outlet>
 
 <p-toast [baseZIndex]="100"></p-toast>
+<p-toast
+  [baseZIndex]="100"
+  key="loading"
+  position="bottom-right"
+  [style]="{ width: 'auto' }"
+>
+  <ng-template pTemplate><div>Loading...</div></ng-template>
+</p-toast>
 
 <div class="waiting-overlay" *ngIf="ws.waiting"></div>

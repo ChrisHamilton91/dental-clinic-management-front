@@ -70,6 +70,7 @@ export class BackendService {
             date_of_birth: moment(el.date_of_birth, true)
               .utc()
               .format('YYYY-MM-DD'),
+            patient_full_name: `${el.first_name} ${el.last_name}`,
           };
         });
       })

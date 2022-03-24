@@ -18,6 +18,7 @@ export interface IPersonInfo {
 
 export interface IPatient extends IPersonInfo {
   patient_id: number;
+  patient_full_name?: string;
 }
 
 export interface IEmployee extends IPersonInfo {

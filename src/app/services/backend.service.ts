@@ -4,6 +4,7 @@ import { map, Observable, Subscriber, tap } from 'rxjs';
 import { IPersonInfo, IPatient } from 'src/schema/person';
 import { ApiKeyService } from './api-key.service';
 import * as moment from 'moment';
+import { IAppointmentInfo } from 'src/schema/appointment';
 
 @Injectable({
   providedIn: 'root',
@@ -74,5 +75,33 @@ export class BackendService {
           }))
       )
     );
+  }
+
+  addAppointment(
+    patient_id: number,
+    dentist_id: number,
+    apt_info: IAppointmentInfo
+  ) {
+    console.log(
+      'Adding appointment for patient: ',
+      patient_id,
+      'and dentist: ',
+      dentist_id,
+      ' with: ',
+      apt_info
+    );
+    return new Observable<string>((observer) => {
+      setTimeout(() => {
+        observer.next('Appointment added! (But not really)');
+        observer.complete();
+      }, 3000);
+    });
+    // return this.http.post(
+    //   this.baseUrl + '/add-appointment',
+    //   { ...apt_info, patient_id, dentist_id },
+    //   {
+    //     headers: { 'api-key': this.aks.apiKey },
+    //   }
+    // );
   }
 }

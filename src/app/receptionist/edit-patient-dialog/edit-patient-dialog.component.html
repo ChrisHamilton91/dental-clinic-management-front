@@ -9,59 +9,53 @@
     <form [formGroup]="ds.form" class="form">
       <!-- House Number -->
       <div class="form-control">
-        <span class="p-float-label">
-          <input
-            id="add-patient-dialog-house-number"
-            type="text"
-            pInputText
-            formControlName="house_number"
-          />
-          <label for="add-patient-dialog-house-number">House Number</label>
-        </span>
+        <label for="edit-patient-dialog-house-number">House Number</label>
+        <input
+          id="edit-patient-dialog-house-number"
+          type="text"
+          pInputText
+          formControlName="house_number"
+        />
         <div class="p-error error-container">
           {{ ds.getErrorMessage("house_number") }}
         </div>
       </div>
       <!-- Street -->
       <div class="form-control">
-        <span class="p-float-label">
-          <input
-            id="add-patient-dialog-street"
-            type="text"
-            pInputText
-            formControlName="street"
-          />
-          <label for="add-patient-dialog-street">Street</label>
-        </span>
+        <label for="edit-patient-dialog-street">Street</label>
+        <input
+          id="edit-patient-dialog-street"
+          type="text"
+          pInputText
+          formControlName="street"
+        />
         <div class="p-error error-container">
           {{ ds.getErrorMessage("street") }}
         </div>
       </div>
       <!-- City -->
       <div class="form-control">
-        <span class="p-float-label">
-          <input
-            id="add-patient-dialog-city"
-            type="text"
-            pInputText
-            formControlName="city"
-          />
-          <label for="add-patient-dialog-city">City</label>
-        </span>
+        <label for="edit-patient-dialog-city">City</label>
+        <input
+          id="edit-patient-dialog-city"
+          type="text"
+          pInputText
+          formControlName="city"
+        />
         <div class="p-error error-container">
           {{ ds.getErrorMessage("city") }}
         </div>
       </div>
       <!-- Province -->
       <div class="form-control">
+        <label for="edit-patient-province">Province</label>
         <p-dropdown
+          id="edit-patient-province"
           [style]="{ width: '100%' }"
-          placeholder="Province"
           [options]="provinces"
           formControlName="province"
-          optionLabel="name"
-          optionValue="name"
           appendTo="body"
+          placeholder="Pick Province"
         ></p-dropdown>
         <div class="p-error error-container">
           {{ ds.getErrorMessage("province") }}
@@ -69,59 +63,53 @@
       </div>
       <!-- First Name -->
       <div class="form-control">
-        <span class="p-float-label">
-          <input
-            id="add-patient-dialog-first_name"
-            type="text"
-            pInputText
-            formControlName="first_name"
-          />
-          <label for="add-patient-dialog-first_name">First Name</label>
-        </span>
+        <label for="edit-patient-dialog-first_name">First Name</label>
+        <input
+          id="edit-patient-dialog-first_name"
+          type="text"
+          pInputText
+          formControlName="first_name"
+        />
         <div class="p-error error-container">
           {{ ds.getErrorMessage("first_name") }}
         </div>
       </div>
       <!-- Middle Name -->
       <div class="form-control">
-        <span class="p-float-label">
-          <input
-            id="add-patient-dialog-middle_name"
-            type="text"
-            pInputText
-            formControlName="middle_name"
-          />
-          <label for="add-patient-dialog-middle_name">Middle Name</label>
-        </span>
+        <label for="edit-patient-dialog-middle_name">Middle Name</label>
+        <input
+          id="edit-patient-dialog-middle_name"
+          type="text"
+          pInputText
+          formControlName="middle_name"
+        />
         <div class="p-error error-container">
           {{ ds.getErrorMessage("middle_name") }}
         </div>
       </div>
       <!-- Last Name -->
       <div class="form-control">
-        <span class="p-float-label">
-          <input
-            id="add-patient-dialog-last_name"
-            type="text"
-            pInputText
-            formControlName="last_name"
-          />
-          <label for="add-patient-dialog-last_name">Last Name</label>
-        </span>
+        <label for="edit-patient-dialog-last_name">Last Name</label>
+        <input
+          id="edit-patient-dialog-last_name"
+          type="text"
+          pInputText
+          formControlName="last_name"
+        />
         <div class="p-error error-container">
           {{ ds.getErrorMessage("last_name") }}
         </div>
       </div>
       <!-- Gender -->
       <div class="form-control">
+        <label for="edit-patient-dialog-gender">Gender</label>
         <p-dropdown
+          id="edit-patient-dialog-gender"
           [style]="{ width: '100%' }"
-          placeholder="Gender"
           [options]="genders"
           formControlName="gender"
-          optionLabel="name"
-          optionValue="name"
           appendTo="body"
+          placeholder="Pick Gender"
         ></p-dropdown>
         <div class="p-error error-container">
           {{ ds.getErrorMessage("gender") }}
@@ -129,43 +117,41 @@
       </div>
       <!-- SSN -->
       <div class="form-control">
-        <span class="p-float-label">
-          <input
-            id="add-patient-dialog-ssn"
-            type="text"
-            pInputText
-            formControlName="ssn"
-          />
-          <label for="add-patient-dialog-ssn">SSN (Must be unique)</label>
-        </span>
+        <label for="edit-patient-dialog-ssn">SSN (Must be unique)</label>
+        <input
+          id="edit-patient-dialog-ssn"
+          type="text"
+          pInputText
+          formControlName="ssn"
+        />
         <div class="p-error error-container">
           {{ ds.getErrorMessage("ssn") }}
         </div>
       </div>
       <!-- email -->
       <div class="form-control">
-        <span class="p-float-label">
-          <input
-            id="add-patient-dialog-email"
-            type="text"
-            pInputText
-            formControlName="email"
-          />
-          <label for="add-patient-dialog-email">Email</label>
-        </span>
+        <label for="edit-patient-dialog-email">Email</label>
+        <input
+          id="edit-patient-dialog-email"
+          type="text"
+          pInputText
+          formControlName="email"
+        />
         <div class="p-error error-container">
           {{ ds.getErrorMessage("email") }}
         </div>
       </div>
       <!-- Date of birth -->
       <div class="form-control">
+        <label for="edit-patient-dialog-date_of_birth">Date of Birth</label>
         <p-calendar
+          id="edit-patient-dialog-date_of_birth"
           [style]="{ width: '100%' }"
           formControlName="date_of_birth"
           dateFormat="yy-mm-dd"
           [maxDate]="now"
           appendTo="body"
-          placeholder="Date of Birth"
+          placeholder="Pick Date"
         ></p-calendar>
         <div class="p-error error-container">
           {{ ds.getErrorMessage("date_of_birth") }}

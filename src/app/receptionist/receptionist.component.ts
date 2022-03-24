@@ -3,6 +3,7 @@ import { finalize, Observable, Subscription } from 'rxjs';
 import { IPatient } from 'src/schema/person';
 import { BackendService } from '../services/backend.service';
 import { LoadingNotificationService } from '../services/loading-notification.service';
+import { AddPatientAptDialogService } from './add-patient-apt-dialog/add-patient-apt-dialog.service';
 import { AddPatientDialogService } from './add-patient-dialog/add-patient-dialog.service';
 import { EditPatientDialogService } from './edit-patient-dialog/edit-patient-dialog.service';
 import { ReceptionistTableService } from './receptionist-table.service';
@@ -29,6 +30,7 @@ export class ReceptionistComponent implements OnInit, OnDestroy {
   constructor(
     private addPatientDialog: AddPatientDialogService,
     private editPatientDialog: EditPatientDialogService,
+    private addAptDialog: AddPatientAptDialogService,
     private bes: BackendService,
     private rrts: ReceptionistTableService,
     private lns: LoadingNotificationService
@@ -58,7 +60,8 @@ export class ReceptionistComponent implements OnInit, OnDestroy {
   }
 
   addAppointment(p: any) {
-    console.log(p);
+    this.addAptDialog.setPatient(p);
+    this.addAptDialog.visible = true;
   }
 
   addNewPatient() {

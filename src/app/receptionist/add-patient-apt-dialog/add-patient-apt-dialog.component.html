@@ -1,0 +1,130 @@
+<p-dialog
+  [style]="{ 'max-width': '50.4vw' }"
+  header="Add Appointment for Patient ID: {{ ds.patient?.patient_id }}"
+  [(visible)]="ds.visible"
+  [modal]="true"
+  (onHide)="onHide()"
+>
+  <ng-template pTemplate="content">
+    <form [formGroup]="ds.form" class="form">
+      <!-- dentist_id -->
+      <div class="form-control">
+        <label for="add-patient-apt-dialog-dentist_id">Dentist</label>
+        <p-dropdown
+          id="add-patient-apt-dialog-dentist_id"
+          [style]="{ width: '100%' }"
+          placeholder="Pick Dentist"
+          [options]="dentists"
+          formControlName="dentist_id"
+          optionLabel="name"
+          optionValue="id"
+          appendTo="body"
+        ></p-dropdown>
+        <div class="p-error error-container">
+          {{ ds.getErrorMessage("dentist_id") }}
+        </div>
+      </div>
+      <!-- day -->
+      <div class="form-control">
+        <label for="add-patient-apt-dialog-day">Day</label>
+        <p-calendar
+          id="add-patient-apt-dialog-day"
+          [style]="{ width: '100%' }"
+          formControlName="day"
+          dateFormat="yy-mm-dd"
+          [minDate]="now"
+          appendTo="body"
+          placeholder="Pick Day"
+        ></p-calendar>
+        <div class="p-error error-container">
+          {{ ds.getErrorMessage("day") }}
+        </div>
+      </div>
+      <!-- start_time -->
+      <div class="form-control">
+        <label for="add-patient-apt-dialog-start_time">Start Time</label>
+        <p-calendar
+          id="add-patient-apt-dialog-start_time"
+          [style]="{ width: '100%' }"
+          formControlName="start_time"
+          dateFormat="yy-mm-dd"
+          [minDate]="now"
+          appendTo="body"
+          placeholder="Pick Start Time"
+          [timeOnly]="true"
+        ></p-calendar>
+        <div class="p-error error-container">
+          {{ ds.getErrorMessage("start_time") }}
+        </div>
+      </div>
+      <!-- end_time -->
+      <div class="form-control">
+        <label for="add-patient-apt-dialog-end_time">End Time</label>
+        <p-calendar
+          id="add-patient-apt-dialog-end_time"
+          [style]="{ width: '100%' }"
+          formControlName="end_time"
+          dateFormat="yy-mm-dd"
+          [minDate]="now"
+          appendTo="body"
+          placeholder="Pick End Time"
+          [timeOnly]="true"
+        ></p-calendar>
+        <div class="p-error error-container">
+          {{ ds.getErrorMessage("end_time") }}
+        </div>
+      </div>
+      <!-- type -->
+      <div class="form-control">
+        <label for="add-patient-apt-dialog-type">Type</label>
+        <p-dropdown
+          id="add-patient-apt-dialog-type"
+          [style]="{ width: '100%' }"
+          placeholder="Pick Type"
+          [options]="types"
+          formControlName="type"
+          appendTo="body"
+        ></p-dropdown>
+        <div class="p-error error-container">
+          {{ ds.getErrorMessage("type") }}
+        </div>
+      </div>
+      <!-- room -->
+      <div class="form-control">
+        <label for="add-patient-apt-dialog-room">Room</label>
+        <p-dropdown
+          id="add-patient-apt-dialog-room"
+          [style]="{ width: '100%' }"
+          placeholder="Pick Room"
+          [options]="rooms"
+          formControlName="room"
+          appendTo="body"
+        ></p-dropdown>
+        <div class="p-error error-container">
+          {{ ds.getErrorMessage("room") }}
+        </div>
+      </div>
+    </form>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <div class="footer-container">
+      <div class="p-error footer-error">{{ errorMessage }}</div>
+      <div class="spacer" style="flex-grow: 1"></div>
+      <button
+        pButton
+        type="button"
+        class="p-button-danger"
+        label="Cancel"
+        (click)="ds.visible = false"
+      ></button>
+      <button
+        pButton
+        type="button"
+        class="p-button-success"
+        label="Submit"
+        (click)="submit()"
+      ></button>
+    </div>
+  </ng-template>
+</p-dialog>

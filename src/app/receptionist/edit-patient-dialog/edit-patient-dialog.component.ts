@@ -5,7 +5,7 @@ import { BackendService } from 'src/app/services/backend.service';
 import { WaitingService } from 'src/app/services/waiting.service';
 import { genderNames } from 'src/schema/genders';
 import { IPatient } from 'src/schema/person';
-import { provinceNames } from 'src/schema/provinces';
+import { provinces } from 'src/schema/provinces';
 import { ReceptionistTableService } from '../receptionist-table.service';
 import { EditPatientDialogService } from './edit-patient-dialog.service';
 
@@ -15,7 +15,7 @@ import { EditPatientDialogService } from './edit-patient-dialog.service';
   styleUrls: ['./edit-patient-dialog.component.scss'],
 })
 export class EditPatientDialogComponent implements OnInit {
-  provinces = provinceNames;
+  provinces = provinces;
   genders = genderNames;
   now = new Date();
   errorMessage = '';
@@ -40,6 +40,7 @@ export class EditPatientDialogComponent implements OnInit {
       this.errorMessage = 'One or more fields are invalid.';
       return;
     }
+    this.errorMessage = '';
     this.ws.waiting = true;
     this.bes
       .updatePatient(this.ds.patient.patient_id, this.ds.getFormOutput())
@@ -65,5 +66,6 @@ export class EditPatientDialogComponent implements OnInit {
 
   onHide() {
     this.ds.form.reset();
+    this.errorMessage = '';
   }
 }

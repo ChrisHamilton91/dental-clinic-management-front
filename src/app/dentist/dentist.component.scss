@@ -1,0 +1,19 @@
+.container {
+  background-color: var(--surface-b);
+  margin: 25px 3vw;
+  padding: 1.5vw;
+  border-radius: 10px;
+}
+
+.table-container {
+  background-color: var(--surface-a);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.table-header {
+  display: flex;
+  font-size: 2rem;
+  align-items: center;
+  color: var(--text-color);
+}

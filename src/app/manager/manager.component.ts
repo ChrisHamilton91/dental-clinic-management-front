@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { finalize, Observable, Subscription } from 'rxjs';
+import { IEmployee } from 'src/schema/person';
 import { BackendService } from '../services/backend.service';
 import { LoadingNotificationService } from '../services/loading-notification.service';
 import { AddEmployeeDialogService } from './add-employee-dialog/add-employee-dialog.service';
@@ -11,7 +12,7 @@ import { ManagerTableService } from './manager-table.service';
   styleUrls: ['./manager.component.scss'],
 })
 export class ManagerComponent implements OnInit {
-  employees = new Observable<any[]>();
+  employees = new Observable<IEmployee[]>();
   cols = [
     { field: 'employee_id', header: 'Employee ID' },
     { field: 'branch_id', header: 'Branch ID' },

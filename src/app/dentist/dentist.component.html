@@ -1,1 +1,38 @@
-<p>dentist works!</p>
+<div class="container">
+  <div class="table-container">
+    <p-table [value]="(appointments | async) || []" [rowHover]="true">
+      <ng-template pTemplate="caption">
+        <div class="table-header">
+          <span>Appointments For Dentist: </span>
+          <span style="width: 2rem"></span>
+          <p-dropdown
+            id="add-patient-apt-dialog-dentist_id"
+            [style]="{ width: '100%' }"
+            placeholder="Pick Dentist"
+            [options]="(dentists | async) || []"
+            [(ngModel)]="dentist_id"
+            optionLabel="dentist_name"
+            optionValue="dentist_id"
+            appendTo="body"
+          ></p-dropdown>
+        </div>
+      </ng-template>
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th *ngFor="let col of cols">
+            {{ col.header }}
+          </th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-el>
+        <tr>
+          <td *ngFor="let col of cols">
+            {{ el[col.field] }}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

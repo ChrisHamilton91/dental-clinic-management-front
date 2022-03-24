@@ -63,34 +63,32 @@ export class BackendService {
 
   getAllPatients(): Observable<IPatient[]> {
     return this.http.get<IPatient[]>(this.baseUrl + '/get-all-patients').pipe(
-      map(
-        (res) =>
-          (res = res.map((el) => {
-            return {
-              ...el,
-              date_of_birth: moment(el.date_of_birth, true)
-                .utc()
-                .format('YYYY-MM-DD'),
-            };
-          }))
-      )
+      map((res) => {
+        return res.map((el) => {
+          return {
+            ...el,
+            date_of_birth: moment(el.date_of_birth, true)
+              .utc()
+              .format('YYYY-MM-DD'),
+          };
+        });
+      })
     );
   }
 
   getAllEmployees(): Observable<IEmployee[]> {
     return this.http.get<IEmployee[]>(this.baseUrl + '/get-all-employees').pipe(
-      map(
-        (res) =>
-          (res = res.map((el) => {
-            return {
-              ...el,
-              date_of_birth: moment(el.date_of_birth, true)
-                .utc()
-                .format('YYYY-MM-DD'),
-              position: this.getEmployeePosition(el),
-            };
-          }))
-      )
+      map((res) => {
+        return res.map((el) => {
+          return {
+            ...el,
+            date_of_birth: moment(el.date_of_birth, true)
+              .utc()
+              .format('YYYY-MM-DD'),
+            position: this.getEmployeePosition(el),
+          };
+        });
+      })
     );
   }
 
@@ -138,5 +136,18 @@ export class BackendService {
     //     headers: { 'api-key': this.aks.apiKey },
     //   }
     // );
+  }
+
+  getAllDentists(): Observable<IEmployee[]> {
+    return this.http.get<IEmployee[]>(this.baseUrl + '/get-all-dentists').pipe(
+      map((res) => {
+        return res.map((dentist) => {
+          return {
+            ...dentist,
+            dentist_name: `Dr. ${dentist.first_name} ${dentist.last_name}`,
+          };
+        });
+      })
+    );
   }
 }

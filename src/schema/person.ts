@@ -28,6 +28,7 @@ export interface IEmployee extends IPersonInfo {
   receptionist_id?: number;
   manager_id?: number;
   hygienist_id?: number;
+  dentist_name?: string;
 }
 
 enum Gender {

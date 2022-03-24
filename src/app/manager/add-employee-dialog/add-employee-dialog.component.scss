@@ -1,0 +1,31 @@
+.form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  column-gap: 16px;
+}
+
+.form-control {
+  width: 300px;
+}
+
+.error-container {
+  min-height: 1.2rem;
+  font-size: 0.7rem;
+  padding-left: 12px;
+}
+
+input {
+  width: 100%;
+}
+
+.footer-container {
+  display: flex;
+  align-items: flex-start;
+}
+
+.footer-error {
+  width: calc(100% - 12rem);
+  text-align: start;
+}

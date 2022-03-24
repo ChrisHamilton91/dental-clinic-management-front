@@ -32,13 +32,13 @@ export class ReceptionistComponent implements OnInit, OnDestroy {
     private editPatientDialog: EditPatientDialogService,
     private addAptDialog: AddPatientAptDialogService,
     private bes: BackendService,
-    private rrts: ReceptionistTableService,
+    private rts: ReceptionistTableService,
     private lns: LoadingNotificationService
   ) {}
 
   ngOnInit(): void {
     this.refreshPatients();
-    this.refreshSub = this.rrts.refreshSubject.subscribe(() =>
+    this.refreshSub = this.rts.refreshSubject.subscribe(() =>
       this.refreshPatients()
     );
   }

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, Subscriber, tap } from 'rxjs';
-import { IPersonInfo, IPatient } from 'src/schema/person';
+import { map, Observable, tap } from 'rxjs';
+import { IPersonInfo, IPatient, IEmployee } from 'src/schema/person';
 import { ApiKeyService } from './api-key.service';
 import * as moment from 'moment';
 import { IAppointmentInfo } from 'src/schema/appointment';
@@ -61,7 +61,7 @@ export class BackendService {
     // );
   }
 
-  getAllPatients() {
+  getAllPatients(): Observable<IPatient[]> {
     return this.http.get<IPatient[]>(this.baseUrl + '/get-all-patients').pipe(
       map(
         (res) =>
@@ -75,6 +75,41 @@ export class BackendService {
           }))
       )
     );
+  }
+
+  getAllEmployees(): Observable<IEmployee[]> {
+    return this.http.get<IEmployee[]>(this.baseUrl + '/get-all-employees').pipe(
+      map(
+        (res) =>
+          (res = res.map((el) => {
+            return {
+              ...el,
+              date_of_birth: moment(el.date_of_birth, true)
+                .utc()
+                .format('YYYY-MM-DD'),
+              position: this.getEmployeePosition(el),
+            };
+          }))
+      )
+    );
+  }
+
+  getEmployeePosition(e: IEmployee): string {
+    let res = '';
+    if (e.dentist_id) res += 'dentist';
+    if (e.hygienist_id) {
+      if (res) res += ', ';
+      res += 'hygienist';
+    }
+    if (e.receptionist_id) {
+      if (res) res += ', ';
+      res += 'receptionist';
+    }
+    if (e.manager_id) {
+      if (res) res += ', ';
+      res += 'manager';
+    }
+    return res;
   }
 
   addAppointment(

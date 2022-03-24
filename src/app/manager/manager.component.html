@@ -1,1 +1,36 @@
-<p>manager works!</p>
+<div class="container">
+  <div class="table-container">
+    <p-table [value]="(employees | async) || []" [rowHover]="true">
+      <ng-template pTemplate="caption">
+        <div class="table-header">
+          <span>Employees</span>
+          <span style="flex-grow: 1"></span>
+          <button
+            pButton
+            type="button"
+            label="Add New"
+            (click)="addNewEmployee()"
+          ></button>
+        </div>
+      </ng-template>
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th *ngFor="let col of cols">
+            {{ col.header }}
+          </th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-el>
+        <tr>
+          <td *ngFor="let col of cols">
+            {{ el[col.field] }}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+<app-add-employee-dialog></app-add-employee-dialog>

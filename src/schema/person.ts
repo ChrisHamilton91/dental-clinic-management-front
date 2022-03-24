@@ -20,6 +20,16 @@ export interface IPatient extends IPersonInfo {
   patient_id: number;
 }
 
+export interface IEmployee extends IPersonInfo {
+  employee_id: number;
+  branch_id: number;
+  position: string;
+  dentist_id?: number;
+  receptionist_id?: number;
+  manager_id?: number;
+  hygienist_id?: number;
+}
+
 enum Gender {
   MALE = 'Male',
   FEMALE = 'Female',

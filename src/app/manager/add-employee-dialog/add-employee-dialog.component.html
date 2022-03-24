@@ -1,0 +1,183 @@
+<p-dialog
+  [style]="{ 'max-width': '50.4vw' }"
+  header="Add Employee"
+  [(visible)]="ds.visible"
+  [modal]="true"
+  (onHide)="onHide()"
+>
+  <ng-template pTemplate="content">
+    <form [formGroup]="ds.form" class="form">
+      <!-- House Number -->
+      <div class="form-control">
+        <label for="add-employee-dialog-house-number">House Number</label>
+        <input
+          id="add-employee-dialog-house-number"
+          type="text"
+          pInputText
+          formControlName="house_number"
+        />
+        <div class="p-error error-container">
+          {{ ds.getErrorMessage("house_number") }}
+        </div>
+      </div>
+      <!-- Street -->
+      <div class="form-control">
+        <label for="add-employee-dialog-street">Street</label>
+        <input
+          id="add-employee-dialog-street"
+          type="text"
+          pInputText
+          formControlName="street"
+        />
+        <div class="p-error error-container">
+          {{ ds.getErrorMessage("street") }}
+        </div>
+      </div>
+      <!-- City -->
+      <div class="form-control">
+        <label for="add-employee-dialog-city">City</label>
+        <input
+          id="add-employee-dialog-city"
+          type="text"
+          pInputText
+          formControlName="city"
+        />
+        <div class="p-error error-container">
+          {{ ds.getErrorMessage("city") }}
+        </div>
+      </div>
+      <!-- Province -->
+      <div class="form-control">
+        <label for="add-employee-province">Province</label>
+        <p-dropdown
+          id="add-employee-province"
+          [style]="{ width: '100%' }"
+          [options]="provinces"
+          formControlName="province"
+          appendTo="body"
+          placeholder="Pick Province"
+        ></p-dropdown>
+        <div class="p-error error-container">
+          {{ ds.getErrorMessage("province") }}
+        </div>
+      </div>
+      <!-- First Name -->
+      <div class="form-control">
+        <label for="add-employee-dialog-first_name">First Name</label>
+        <input
+          id="add-employee-dialog-first_name"
+          type="text"
+          pInputText
+          formControlName="first_name"
+        />
+        <div class="p-error error-container">
+          {{ ds.getErrorMessage("first_name") }}
+        </div>
+      </div>
+      <!-- Middle Name -->
+      <div class="form-control">
+        <label for="add-employee-dialog-middle_name">Middle Name</label>
+        <input
+          id="add-employee-dialog-middle_name"
+          type="text"
+          pInputText
+          formControlName="middle_name"
+        />
+        <div class="p-error error-container">
+          {{ ds.getErrorMessage("middle_name") }}
+        </div>
+      </div>
+      <!-- Last Name -->
+      <div class="form-control">
+        <label for="add-employee-dialog-last_name">Last Name</label>
+        <input
+          id="add-employee-dialog-last_name"
+          type="text"
+          pInputText
+          formControlName="last_name"
+        />
+        <div class="p-error error-container">
+          {{ ds.getErrorMessage("last_name") }}
+        </div>
+      </div>
+      <!-- Gender -->
+      <div class="form-control">
+        <label for="add-employee-dialog-gender">Gender</label>
+        <p-dropdown
+          id="add-employee-dialog-gender"
+          [style]="{ width: '100%' }"
+          [options]="genders"
+          formControlName="gender"
+          appendTo="body"
+          placeholder="Pick Gender"
+        ></p-dropdown>
+        <div class="p-error error-container">
+          {{ ds.getErrorMessage("gender") }}
+        </div>
+      </div>
+      <!-- SSN -->
+      <div class="form-control">
+        <label for="add-employee-dialog-ssn">SSN (Must be unique)</label>
+        <input
+          id="add-employee-dialog-ssn"
+          type="text"
+          pInputText
+          formControlName="ssn"
+        />
+        <div class="p-error error-container">
+          {{ ds.getErrorMessage("ssn") }}
+        </div>
+      </div>
+      <!-- email -->
+      <div class="form-control">
+        <label for="add-employee-dialog-email">Email</label>
+        <input
+          id="add-employee-dialog-email"
+          type="text"
+          pInputText
+          formControlName="email"
+        />
+        <div class="p-error error-container">
+          {{ ds.getErrorMessage("email") }}
+        </div>
+      </div>
+      <!-- Date of birth -->
+      <div class="form-control">
+        <label for="add-employee-dialog-date_of_birth">Date of Birth</label>
+        <p-calendar
+          id="add-employee-dialog-date_of_birth"
+          [style]="{ width: '100%' }"
+          formControlName="date_of_birth"
+          dateFormat="yy-mm-dd"
+          [maxDate]="now"
+          appendTo="body"
+          placeholder="Pick Date"
+        ></p-calendar>
+        <div class="p-error error-container">
+          {{ ds.getErrorMessage("date_of_birth") }}
+        </div>
+      </div>
+    </form>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <div class="footer-container">
+      <div class="p-error footer-error">{{ errorMessage }}</div>
+      <div class="spacer" style="flex-grow: 1"></div>
+      <button
+        pButton
+        type="button"
+        class="p-button-danger"
+        label="Cancel"
+        (click)="ds.visible = false"
+      ></button>
+      <button
+        pButton
+        type="button"
+        class="p-button-success"
+        label="Submit"
+        (click)="submit()"
+      ></button>
+    </div>
+  </ng-template>
+</p-dialog>

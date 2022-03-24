@@ -1,26 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { finalize } from 'rxjs';
 import { BackendService } from 'src/app/services/backend.service';
 import { WaitingService } from 'src/app/services/waiting.service';
 import { genderNames } from 'src/schema/genders';
+import { IPatient } from 'src/schema/person';
 import { provinceNames } from 'src/schema/provinces';
 import { ReceptionistTableService } from '../receptionist-table.service';
-import { AddPatientDialogService } from './add-patient-dialog.service';
+import { EditPatientDialogService } from './edit-patient-dialog.service';
 
 @Component({
-  selector: 'app-add-patient-dialog',
-  templateUrl: './add-patient-dialog.component.html',
-  styleUrls: ['./add-patient-dialog.component.scss'],
+  selector: 'app-edit-patient-dialog',
+  templateUrl: './edit-patient-dialog.component.html',
+  styleUrls: ['./edit-patient-dialog.component.scss'],
 })
-export class AddPatientDialogComponent implements OnInit {
+export class EditPatientDialogComponent implements OnInit {
   provinces = provinceNames;
   genders = genderNames;
   now = new Date();
   errorMessage = '';
 
   constructor(
-    public ds: AddPatientDialogService,
+    public ds: EditPatientDialogService,
     private bes: BackendService,
     private ms: MessageService,
     private ws: WaitingService,
@@ -30,6 +31,10 @@ export class AddPatientDialogComponent implements OnInit {
   ngOnInit(): void {}
 
   submit() {
+    if (!this.ds.patient?.patient_id) {
+      this.errorMessage = 'Cannot get patient ID!';
+      return;
+    }
     this.ds.markAllAsDirty();
     if (!this.ds.form.valid) {
       this.errorMessage = 'One or more fields are invalid.';
@@ -37,15 +42,14 @@ export class AddPatientDialogComponent implements OnInit {
     }
     this.ws.waiting = true;
     this.bes
-      .addPersonAsPatient(this.ds.getFormOutput())
+      .updatePatient(this.ds.patient.patient_id, this.ds.getFormOutput())
       .pipe(finalize(() => (this.ws.waiting = false)))
       .subscribe({
         next: (res) => {
           console.log(res);
           this.ms.add({
             severity: 'success',
-            summary: 'Patient Added',
-            detail: `Patient ID: ${res.patient_id}, Person ID: ${res.person_id}`,
+            summary: 'Patient Updated',
           });
           this.ds.visible = false;
           this.rts.refresh();
@@ -54,7 +58,7 @@ export class AddPatientDialogComponent implements OnInit {
           console.log(err.error);
           this.errorMessage =
             err.error?.message +
-            (err.error?.detail ? `, ${err.error?.detail}` : '');
+            (err.error?.detail ? `, ${err.error.detail}` : '');
         },
       });
   }

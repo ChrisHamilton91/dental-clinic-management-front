@@ -26,6 +26,7 @@ import { ReceptionistComponent } from './receptionist/receptionist.component';
 import { DentistComponent } from './dentist/dentist.component';
 import { PatientComponent } from './patient/patient.component';
 import { AddPatientDialogComponent } from './receptionist/add-patient-dialog/add-patient-dialog.component';
+import { EditPatientDialogComponent } from './receptionist/edit-patient-dialog/edit-patient-dialog.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { AddPatientDialogComponent } from './receptionist/add-patient-dialog/add
     DentistComponent,
     PatientComponent,
     AddPatientDialogComponent,
+    EditPatientDialogComponent,
   ],
   imports: [
     BrowserModule,

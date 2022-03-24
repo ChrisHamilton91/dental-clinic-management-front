@@ -6,13 +6,14 @@ import {
   Validators,
 } from '@angular/forms';
 import * as moment from 'moment';
-import { IPersonInfo } from 'src/schema/person';
+import { IPatient, IPersonInfo } from 'src/schema/person';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AddPatientDialogService {
+export class EditPatientDialogService {
   visible = false;
+  patient?: IPatient;
 
   form = new FormGroup({
     house_number: new FormControl('', [
@@ -51,6 +52,27 @@ export class AddPatientDialogService {
   });
 
   constructor() {}
+
+  setPatient(p: IPatient) {
+    this.patient = p;
+    this.populateForm(p);
+  }
+
+  private populateForm(p: IPersonInfo) {
+    this.form.controls['house_number'].setValue(p.house_number);
+    this.form.controls['street'].setValue(p.street);
+    this.form.controls['city'].setValue(p.city);
+    this.form.controls['province'].setValue(p.province);
+    this.form.controls['first_name'].setValue(p.first_name);
+    this.form.controls['middle_name'].setValue(p.middle_name);
+    this.form.controls['last_name'].setValue(p.last_name);
+    this.form.controls['gender'].setValue(p.gender);
+    this.form.controls['ssn'].setValue(p.ssn);
+    this.form.controls['email'].setValue(p.email);
+    this.form.controls['date_of_birth'].setValue(
+      moment(p.date_of_birth).utc().toDate()
+    );
+  }
 
   getErrorMessage(controlName: string): string {
     const control = this.form.controls[controlName];

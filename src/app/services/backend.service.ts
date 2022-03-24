@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, Subscriber, tap } from 'rxjs';
-import { IPersonInfo, IPersonJoinPatient } from 'src/schema/person';
+import { IPersonInfo, IPatient } from 'src/schema/person';
 import { ApiKeyService } from './api-key.service';
 import * as moment from 'moment';
 
@@ -43,21 +43,36 @@ export class BackendService {
     );
   }
 
+  updatePatient(patient_id: number, person_info: IPersonInfo) {
+    console.log('Updating patient_id: ', patient_id, ' with: ', person_info);
+    return new Observable<string>((observer) => {
+      setTimeout(() => {
+        observer.next('Patient Updated! (But not really)');
+        observer.complete();
+      }, 3000);
+    });
+    // return this.http.put<string>(
+    //   this.baseUrl + '/update-patient',
+    //   { patient_id, person_info },
+    //   {
+    //     headers: { 'api-key': this.aks.apiKey },
+    //   }
+    // );
+  }
+
   getAllPatients() {
-    return this.http
-      .get<IPersonJoinPatient[]>(this.baseUrl + '/get-all-patients')
-      .pipe(
-        map(
-          (res) =>
-            (res = res.map((el) => {
-              return {
-                ...el,
-                date_of_birth: moment(el.date_of_birth, true)
-                  .utc()
-                  .format('YYYY-MM-DD'),
-              };
-            }))
-        )
-      );
+    return this.http.get<IPatient[]>(this.baseUrl + '/get-all-patients').pipe(
+      map(
+        (res) =>
+          (res = res.map((el) => {
+            return {
+              ...el,
+              date_of_birth: moment(el.date_of_birth, true)
+                .utc()
+                .format('YYYY-MM-DD'),
+            };
+          }))
+      )
+    );
   }
 }

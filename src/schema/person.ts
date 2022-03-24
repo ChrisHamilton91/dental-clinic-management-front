@@ -16,8 +16,8 @@ export interface IPersonInfo {
   date_of_birth: string;
 }
 
-export interface IPersonJoinPatient extends IPersonInfo {
-  patient_id: string;
+export interface IPatient extends IPersonInfo {
+  patient_id: number;
 }
 
 enum Gender {

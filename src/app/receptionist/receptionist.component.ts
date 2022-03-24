@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { finalize, Observable, Subscription } from 'rxjs';
+import { IPatient } from 'src/schema/person';
 import { BackendService } from '../services/backend.service';
 import { LoadingNotificationService } from '../services/loading-notification.service';
 import { AddPatientDialogService } from './add-patient-dialog/add-patient-dialog.service';
+import { EditPatientDialogService } from './edit-patient-dialog/edit-patient-dialog.service';
 import { ReceptionistTableService } from './receptionist-table.service';
 
 @Component({
@@ -26,6 +28,7 @@ export class ReceptionistComponent implements OnInit, OnDestroy {
 
   constructor(
     private addPatientDialog: AddPatientDialogService,
+    private editPatientDialog: EditPatientDialogService,
     private bes: BackendService,
     private rrts: ReceptionistTableService,
     private lns: LoadingNotificationService
@@ -49,8 +52,9 @@ export class ReceptionistComponent implements OnInit, OnDestroy {
       .pipe(finalize(() => this.lns.hide()));
   }
 
-  editPatient(p: any) {
-    console.log(p);
+  editPatient(p: IPatient) {
+    this.editPatientDialog.setPatient(p);
+    this.editPatientDialog.visible = true;
   }
 
   addAppointment(p: any) {

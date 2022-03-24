@@ -1,6 +1,6 @@
 <p-dialog
   [style]="{ 'max-width': '50.4vw' }"
-  header="Add Patient"
+  header="Edit Patient ID: {{ ds.patient?.patient_id }}"
   [(visible)]="ds.visible"
   [modal]="true"
   (onHide)="onHide()"

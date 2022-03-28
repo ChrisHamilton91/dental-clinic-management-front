@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import {
+  AbstractControl,
   FormControl,
   FormGroup,
   ValidationErrors,
   Validators,
 } from '@angular/forms';
 import * as moment from 'moment';
-import { IPersonInfo } from 'src/schema/person';
+import { ageValidator } from 'src/app/services/validators';
+import { IEmployeeInfo } from 'src/schema/person';
 
 @Injectable({
   providedIn: 'root',
@@ -47,14 +49,34 @@ export class AddEmployeeDialogService {
       Validators.max(999999999),
     ]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    date_of_birth: new FormControl('', Validators.required),
+    date_of_birth: new FormControl('', [Validators.required, ageValidator]),
+    branch_city: new FormControl('', Validators.required),
+    position: new FormControl('', Validators.required),
+    type: new FormControl('', Validators.required),
+    salary: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^\d+$/),
+      Validators.min(0),
+    ]),
+    username: new FormControl('', Validators.required),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(8),
+      Validators.pattern(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\.@$!%*?&])[A-Za-z\d\.@$!%*?&]{8,}$/
+      ),
+    ]),
   });
+
+  get position() {
+    return this.form.get('position')?.value;
+  }
 
   constructor() {}
 
   getErrorMessage(controlName: string): string {
     const control = this.form.controls[controlName];
-    if (!control.dirty) return '';
+    if (!control?.dirty) return '';
     const errors = control.errors;
     if (!errors) return '';
     if (errors['required']) return 'Required';
@@ -72,6 +94,12 @@ export class AddEmployeeDialogService {
         return this.getNameErrorMessage(errors);
       case 'ssn':
         return this.getSSNErrorMessage(errors);
+      case 'date_of_birth':
+        return this.getDateOfBirthErrorMessage(errors);
+      case 'salary':
+        return this.getSalaryErrorMessage(errors);
+      case 'password':
+        return this.getPasswordErrorMessage(errors);
     }
     return 'Invalid Input';
   }
@@ -110,7 +138,25 @@ export class AddEmployeeDialogService {
     return 'Invalid Input';
   }
 
-  getFormOutput(): IPersonInfo {
+  private getDateOfBirthErrorMessage(errors: ValidationErrors): string {
+    if (errors['lessThanFifteen']) return 'Must be fifteen years or older';
+    return 'Invalid Input';
+  }
+
+  private getSalaryErrorMessage(errors: ValidationErrors): string {
+    if (errors['pattern']) return 'Must be numeric';
+    if (errors['min']) 'Must be greater than zero';
+    return 'Invalid Input';
+  }
+
+  private getPasswordErrorMessage(errors: ValidationErrors): string {
+    if (errors['minLength']) return 'Must be at least 8 characters';
+    if (errors['pattern'])
+      return 'Must contain upper and lower case letter, number, and special character';
+    return 'Invalid Input';
+  }
+
+  getFormOutput(): IEmployeeInfo & { branch_city: string } {
     return {
       ...this.form.getRawValue(),
       date_of_birth: moment(this.form.controls['date_of_birth'].value)

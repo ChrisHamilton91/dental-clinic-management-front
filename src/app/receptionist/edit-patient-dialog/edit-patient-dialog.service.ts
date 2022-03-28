@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import * as moment from 'moment';
+import { ageValidator } from 'src/app/services/validators';
 import { IPatient, IPersonInfo } from 'src/schema/person';
 
 @Injectable({
@@ -48,7 +49,7 @@ export class EditPatientDialogService {
       Validators.max(999999999),
     ]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    date_of_birth: new FormControl('', Validators.required),
+    date_of_birth: new FormControl('', [Validators.required, ageValidator]),
   });
 
   constructor() {}
@@ -94,6 +95,8 @@ export class EditPatientDialogService {
         return this.getNameErrorMessage(errors);
       case 'ssn':
         return this.getSSNErrorMessage(errors);
+      case 'date_of_birth':
+        return this.getDateOfBirthErrorMessage(errors);
     }
     return 'Invalid Input';
   }
@@ -129,6 +132,11 @@ export class EditPatientDialogService {
     if (errors['pattern']) return 'Must be numeric.';
     if (errors['min']) return 'Must be greater than 0.';
     if (errors['max']) return 'Must be less than 999999999.';
+    return 'Invalid Input';
+  }
+
+  private getDateOfBirthErrorMessage(errors: ValidationErrors): string {
+    if (errors['lessThanFifteen']) return 'Must be fifteen years or older';
     return 'Invalid Input';
   }
 

@@ -157,6 +157,92 @@
           {{ ds.getErrorMessage("date_of_birth") }}
         </div>
       </div>
+      <!-- Branch -->
+      <div class="form-control">
+        <label for="add-employee-branch">Branch</label>
+        <p-dropdown
+          id="add-employee-branch"
+          [style]="{ width: '100%' }"
+          [options]="(branches | async) || []"
+          formControlName="branch_city"
+          optionValue="city"
+          optionLabel="city"
+          appendTo="body"
+          placeholder="Pick Branch"
+        ></p-dropdown>
+        <div class="p-error error-container">
+          {{ ds.getErrorMessage("branch") }}
+        </div>
+      </div>
+      <!-- Position -->
+      <div class="form-control">
+        <label for="add-employee-position">Position</label>
+        <p-dropdown
+          id="add-employee-position"
+          [style]="{ width: '100%' }"
+          [options]="positions"
+          formControlName="position"
+          appendTo="body"
+          placeholder="Pick Position"
+        ></p-dropdown>
+        <div class="p-error error-container">
+          {{ ds.getErrorMessage("position") }}
+        </div>
+      </div>
+      <!-- Type -->
+      <div class="form-control">
+        <label for="add-employee-type">Type</label>
+        <p-dropdown
+          id="add-employee-type"
+          [style]="{ width: '100%' }"
+          [options]="employeeTypes"
+          formControlName="type"
+          appendTo="body"
+          placeholder="Pick Type"
+        ></p-dropdown>
+        <div class="p-error error-container">
+          {{ ds.getErrorMessage("type") }}
+        </div>
+      </div>
+      <!-- Salary -->
+      <div class="form-control">
+        <label for="add-employee-salary">Salary</label>
+        <input
+          id="add-employee-salary"
+          type="text"
+          pInputText
+          formControlName="salary"
+        />
+        <div class="p-error error-container">
+          {{ ds.getErrorMessage("salary") }}
+        </div>
+      </div>
+      <!-- Username -->
+      <div class="form-control">
+        <label for="add-employee-username">Username</label>
+        <input
+          id="add-employee-username"
+          type="text"
+          pInputText
+          formControlName="username"
+        />
+        <div class="p-error error-container">
+          {{ ds.getErrorMessage("username") }}
+        </div>
+      </div>
+      <!-- Password -->
+      <div class="form-control">
+        <label for="add-employee-password">Password</label>
+        <input
+          id="add-employee-password"
+          type="password"
+          pInputText
+          formControlName="password"
+        />
+        <div class="p-error error-container">
+          {{ ds.getErrorMessage("password") }}
+        </div>
+      </div>
     </form>
   </ng-template>
 

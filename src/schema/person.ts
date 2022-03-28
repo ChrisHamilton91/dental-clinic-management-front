@@ -21,7 +21,7 @@ export interface IPatient extends IPersonInfo {
   patient_full_name?: string;
 }
 
-export interface IEmployee extends IPersonInfo {
+export interface IEmployee extends IEmployeeInfo {
   employee_id: number;
   branch_id: number;
   position: string;
@@ -32,8 +32,25 @@ export interface IEmployee extends IPersonInfo {
   dentist_name?: string;
 }
 
-enum Gender {
+export interface IEmployeeInfo extends IPersonInfo {
+  username: string;
+  password: string;
+  type: string;
+  salary: string;
+}
+
+export enum Gender {
   MALE = 'Male',
   FEMALE = 'Female',
   NON_BINARY = 'Non-binary',
 }
+
+export enum Position {
+  DENTIST = 'Dentist',
+  HYGIENIST = 'Hygienist',
+  RECEPTIONIST = 'Receptionist',
+}
+
+export const positions = Object.values(Position);
+
+export const employeeTypes = ['Part-Time', 'Full-Time'];

@@ -1,10 +1,25 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, tap } from 'rxjs';
-import { IPersonInfo, IPatient, IEmployee } from 'src/schema/person';
+import {
+  IPersonInfo,
+  IPatient,
+  IEmployee,
+  IEmployeeInfo,
+} from 'src/schema/person';
 import { ApiKeyService } from './api-key.service';
 import * as moment from 'moment';
 import { IAppointmentInfo } from 'src/schema/appointment';
+import { Branch } from 'src/schema/branch';
+
+export type AddEmployeeReturn = {
+  person_id_ret: number;
+  employee_id_ret: number;
+  user_id_ret: number;
+  dentist_id_ret?: number;
+  hygienist_id_ret?: number;
+  receptionist_id_ret?: number;
+};
 
 @Injectable({
   providedIn: 'root',
@@ -139,6 +154,46 @@ export class BackendService {
   getProcedureTypes(): Observable<{ type: string }[]> {
     return this.http.get<{ type: string }[]>(
       this.baseUrl + '/get-procedure-types'
+    );
+  }
+
+  getAllBranches(): Observable<Branch[]> {
+    return this.http.get<Branch[]>(this.baseUrl + '/get-all-branches');
+  }
+
+  addPersonAsDentist(
+    employeeInfo: IEmployeeInfo & { branch_city: string }
+  ): Observable<AddEmployeeReturn> {
+    return this.http.post<AddEmployeeReturn>(
+      this.baseUrl + '/add-person-as-dentist',
+      employeeInfo,
+      {
+        headers: { 'api-key': this.aks.apiKey },
+      }
+    );
+  }
+
+  addPersonAsHygienist(
+    employeeInfo: IEmployeeInfo & { branch_city: string }
+  ): Observable<AddEmployeeReturn> {
+    return this.http.post<AddEmployeeReturn>(
+      this.baseUrl + '/add-person-as-hygienist',
+      employeeInfo,
+      {
+        headers: { 'api-key': this.aks.apiKey },
+      }
+    );
+  }
+
+  addPersonAsReceptionist(
+    employeeInfo: IEmployeeInfo & { branch_city: string }
+  ): Observable<AddEmployeeReturn> {
+    return this.http.post<AddEmployeeReturn>(
+      this.baseUrl + '/add-person-as-receptionist',
+      employeeInfo,
+      {
+        headers: { 'api-key': this.aks.apiKey },
+      }
     );
   }
 }

@@ -61,9 +61,11 @@ export class AddPatientAptDialogComponent implements OnInit {
         },
         error: (err) => {
           console.log(err.error);
-          this.errorMessage =
-            err.error?.message +
-            (err.error?.detail ? `, ${err.error.detail}` : '');
+          if (typeof err.error === 'string') this.errorMessage = err.error;
+          else
+            this.errorMessage =
+              err.error?.message +
+              (err.error?.detail ? `, ${err.error.detail}` : '');
         },
       });
   }

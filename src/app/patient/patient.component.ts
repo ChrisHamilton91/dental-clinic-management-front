@@ -17,11 +17,13 @@ export class PatientComponent implements OnInit {
   patient?: IPatient;
   appointments = new Observable<IAppointment[]>();
   cols = [
+    { field: 'appointment_id', header: 'Apt ID' },
     { field: 'dentist_id', header: 'Dentist ID' },
     { field: 'start_time', header: 'Start Time' },
     { field: 'end_time', header: 'End Time' },
     { field: 'type', header: 'Type' },
     { field: 'room', header: 'Room' },
+    { field: 'status', header: 'Status' },
   ];
   constructor(
     private lns: LoadingNotificationService,

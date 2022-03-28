@@ -30,6 +30,7 @@ import { EditPatientDialogComponent } from './receptionist/edit-patient-dialog/e
 import { AddPatientAptDialogComponent } from './receptionist/add-patient-apt-dialog/add-patient-apt-dialog.component';
 import { ManagerComponent } from './manager/manager.component';
 import { AddEmployeeDialogComponent } from './manager/add-employee-dialog/add-employee-dialog.component';
+import { ShowRecordsDialogComponent } from './dentist/show-records-dialog/show-records-dialog.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { AddEmployeeDialogComponent } from './manager/add-employee-dialog/add-em
     AddPatientAptDialogComponent,
     ManagerComponent,
     AddEmployeeDialogComponent,
+    ShowRecordsDialogComponent,
   ],
   imports: [
     BrowserModule,

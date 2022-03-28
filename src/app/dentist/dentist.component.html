@@ -14,6 +14,7 @@
             optionLabel="dentist_name"
             optionValue="dentist_id"
             appendTo="body"
+            (ngModelChange)="getAppointments($event)"
           ></p-dropdown>
         </div>
       </ng-template>
@@ -23,6 +24,7 @@
           <th *ngFor="let col of cols">
             {{ col.header }}
           </th>
+          <th>Records</th>
         </tr>
       </ng-template>
 
@@ -31,8 +33,19 @@
           <td *ngFor="let col of cols">
             {{ el[col.field] }}
           </td>
+          <td>
+            <button
+              (click)="seePatientRecords(el)"
+              class="p-button-help"
+              pButton
+              type="button"
+              icon="pi pi-book"
+            ></button>
+          </td>
         </tr>
       </ng-template>
     </p-table>
   </div>
 </div>
+
+<app-show-records-dialog></app-show-records-dialog>

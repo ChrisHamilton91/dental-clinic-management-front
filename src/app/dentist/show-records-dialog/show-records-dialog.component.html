@@ -1,0 +1,17 @@
+<p-dialog
+  [style]="{ 'max-width': '50.4vw' }"
+  header="Viewing records for Patient ID: {{ ds.patient?.patient_id }}"
+  [(visible)]="ds.visible"
+  [modal]="true"
+>
+  <div class="treatment-block" *ngFor="let r of ds.records | async">
+    <div class="treatment-header">
+      Appointment: {{ r.appointment_id }} Treatment
+    </div>
+    <div>Type: {{ r.type }}</div>
+    <div>Tooth: {{ r.tooth }}</div>
+    <div>Medication: {{ r.medication }}</div>
+    <div>Symptoms: {{ r.symptoms }}</div>
+    <div>Comments: {{ r.comments }}</div>
+  </div>
+</p-dialog>

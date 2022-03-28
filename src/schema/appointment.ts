@@ -1,6 +1,7 @@
 export interface IAppointment extends IAppointmentInfo {
   patient_id: number;
   dentist_id: number;
+  status: string;
 }
 
 export interface IAppointmentInfo {

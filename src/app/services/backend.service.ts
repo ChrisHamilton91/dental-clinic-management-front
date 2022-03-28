@@ -9,8 +9,9 @@ import {
 } from 'src/schema/person';
 import { ApiKeyService } from './api-key.service';
 import * as moment from 'moment';
-import { IAppointmentInfo } from 'src/schema/appointment';
+import { IAppointment, IAppointmentInfo } from 'src/schema/appointment';
 import { Branch } from 'src/schema/branch';
+import { Treatment } from 'src/schema/treatment';
 
 export type AddEmployeeReturn = {
   person_id_ret: number;
@@ -195,5 +196,100 @@ export class BackendService {
         headers: { 'api-key': this.aks.apiKey },
       }
     );
+  }
+
+  getDentistAppointments(dentist_id: number): Observable<IAppointment[]> {
+    return this.http
+      .get<IAppointment[]>(
+        this.baseUrl + '/check-appointments-for-dentist/' + dentist_id,
+        {
+          headers: { 'api-key': this.aks.apiKey },
+        }
+      )
+      .pipe(
+        map((apts) =>
+          apts.map((apt) => {
+            return {
+              ...apt,
+              start_time: moment(apt.start_time).format('YYYY-MM-DD @ hh:mm'),
+              end_time: moment(apt.end_time).format('YYYY-MM-DD @ hh:mm'),
+            };
+          })
+        )
+      );
+  }
+
+  getPatientAppointments(patient_id: number): Observable<IAppointment[]> {
+    return this.http
+      .get<IAppointment[]>(
+        this.baseUrl + '/check-appointments-for-patient/' + patient_id,
+        {
+          headers: { 'api-key': this.aks.apiKey },
+        }
+      )
+      .pipe(
+        map((apts) =>
+          apts.map((apt) => {
+            return {
+              ...apt,
+              start_time: moment(apt.start_time).format('YYYY-MM-DD @ hh:mm'),
+              end_time: moment(apt.end_time).format('YYYY-MM-DD @ hh:mm'),
+            };
+          })
+        )
+      );
+  }
+
+  getPatientTreatments(patient_id: number): Observable<Treatment[]> {
+    return new Observable<Treatment[]>((observer) => {
+      observer.next([
+        {
+          id: 1,
+          patient_id: 2,
+          hygienist_id: undefined,
+          dentist_id: 3,
+          type: 'type',
+          medication: 'medication',
+          symptoms: 'symptoms',
+          comments:
+            'comments comments comments comments comments comments comments comments comments comments comments comments',
+          appointment_id: 24,
+          tooth: '23',
+        },
+        {
+          id: 1,
+          patient_id: 2,
+          hygienist_id: undefined,
+          dentist_id: 3,
+          type: 'type',
+          medication: 'medication',
+          symptoms: 'symptoms',
+          comments:
+            'comments comments comments comments comments comments comments comments comments comments comments comments',
+          appointment_id: 25,
+          tooth: '23',
+        },
+        {
+          id: 1,
+          patient_id: 2,
+          hygienist_id: undefined,
+          dentist_id: 3,
+          type: 'type',
+          medication: 'medication',
+          symptoms: 'symptoms',
+          comments:
+            'comments comments comments comments comments comments comments comments comments comments comments comments',
+          appointment_id: 26,
+          tooth: '23',
+        },
+      ]);
+      observer.complete();
+    });
+    // return this.http.get<Treatment[]>(
+    //   this.baseUrl + '/get-patient-treatments/' + patient_id,
+    //   {
+    //     headers: { 'api-key': this.aks.apiKey },
+    //   }
+    // );
   }
 }

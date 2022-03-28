@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { finalize, Observable } from 'rxjs';
+import { PatientTableService } from 'src/app/patient/patient-table.service';
 import { BackendService } from 'src/app/services/backend.service';
 import { LoadingNotificationService } from 'src/app/services/loading-notification.service';
 import { WaitingService } from 'src/app/services/waiting.service';
@@ -24,7 +25,8 @@ export class AddPatientAptDialogComponent implements OnInit {
     private bes: BackendService,
     private ms: MessageService,
     private ws: WaitingService,
-    private lns: LoadingNotificationService
+    private lns: LoadingNotificationService,
+    private rts: PatientTableService
   ) {}
 
   ngOnInit(): void {
@@ -73,6 +75,7 @@ export class AddPatientAptDialogComponent implements OnInit {
   onHide() {
     this.ds.form.reset();
     this.errorMessage = '';
+    this.rts.refresh();
   }
 
   refreshDentists() {

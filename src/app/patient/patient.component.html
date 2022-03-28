@@ -13,8 +13,18 @@
             [(ngModel)]="patient"
             optionLabel="patient_full_name"
             appendTo="body"
+            (ngModelChange)="getAppointments($event)"
           ></p-dropdown>
           <div style="flex-grow: 1"></div>
+          <button
+            (click)="seePatientRecords()"
+            class="p-button-help"
+            pButton
+            type="button"
+            icon="pi pi-book"
+            label="See Records"
+          ></button>
+          <div style="width: 16px"></div>
           <button
             (click)="addAppointment()"
             pButton
@@ -46,3 +56,4 @@
 </div>
 
 <app-add-patient-apt-dialog></app-add-patient-apt-dialog>
+<app-show-records-dialog></app-show-records-dialog>

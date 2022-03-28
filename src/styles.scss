@@ -31,3 +31,7 @@ app-navbar
   outline-offset: 0;
   box-shadow: inset 0 0 0 0.15rem #e3f3fe;
 }
+
+p-toast > div {
+  z-index: 100;
+}

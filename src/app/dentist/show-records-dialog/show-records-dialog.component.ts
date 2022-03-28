@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
+import { PatientTableService } from 'src/app/patient/patient-table.service';
 import { BackendService } from 'src/app/services/backend.service';
 import { Treatment } from 'src/schema/treatment';
 import { ShowRecordsDialogService } from './show-records-dialog.service';

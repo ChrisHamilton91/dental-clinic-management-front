@@ -51,6 +51,7 @@ export class EditPatientDialogComponent implements OnInit {
           this.ms.add({
             severity: 'success',
             summary: 'Patient Updated',
+            detail: res,
           });
           this.ds.visible = false;
           this.rts.refresh();

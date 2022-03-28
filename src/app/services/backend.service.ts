@@ -45,20 +45,18 @@ export class BackendService {
   }
 
   updatePatient(patient_id: number, person_info: IPersonInfo) {
-    console.log('Updating patient_id: ', patient_id, ' with: ', person_info);
-    return new Observable<string>((observer) => {
-      setTimeout(() => {
-        observer.next('Patient Updated! (But not really)');
-        observer.complete();
-      }, 3000);
-    });
-    // return this.http.put<string>(
-    //   this.baseUrl + '/update-patient',
-    //   { patient_id, person_info },
-    //   {
-    //     headers: { 'api-key': this.aks.apiKey },
-    //   }
-    // );
+    return this.http.patch(
+      this.baseUrl + '/update-patient-with-patient-id',
+      {
+        patient_id,
+        ...person_info,
+        house_number: person_info.house_number.toString(),
+      },
+      {
+        headers: { 'api-key': this.aks.apiKey },
+        responseType: 'text' as const,
+      }
+    );
   }
 
   getAllPatients(): Observable<IPatient[]> {

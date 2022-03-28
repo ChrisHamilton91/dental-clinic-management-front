@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { finalize } from 'rxjs';
+import { finalize, Observable } from 'rxjs';
 import { BackendService } from 'src/app/services/backend.service';
+import { LoadingNotificationService } from 'src/app/services/loading-notification.service';
 import { WaitingService } from 'src/app/services/waiting.service';
+import { IEmployee } from 'src/schema/person';
 import { AddPatientAptDialogService } from './add-patient-apt-dialog.service';
 
 @Component({
@@ -11,13 +13,9 @@ import { AddPatientAptDialogService } from './add-patient-apt-dialog.service';
   styleUrls: ['./add-patient-apt-dialog.component.scss'],
 })
 export class AddPatientAptDialogComponent implements OnInit {
-  dentists = [
-    { id: 1, name: 'Joe' },
-    { id: 2, name: 'John' },
-    { id: 3, name: 'Jacob' },
-  ];
-  types = ['type one', 'type two', 'type three'];
-  rooms = ['room one', 'room two', 'room three'];
+  dentists = new Observable<IEmployee[]>();
+  types = new Observable<{ type: string }[]>();
+  rooms = '';
   now = new Date();
   errorMessage = '';
 
@@ -25,10 +23,14 @@ export class AddPatientAptDialogComponent implements OnInit {
     public ds: AddPatientAptDialogService,
     private bes: BackendService,
     private ms: MessageService,
-    private ws: WaitingService
+    private ws: WaitingService,
+    private lns: LoadingNotificationService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.refreshDentists();
+    this.refreshTypes();
+  }
 
   submit() {
     if (!this.ds.patient?.patient_id) {
@@ -53,6 +55,7 @@ export class AddPatientAptDialogComponent implements OnInit {
           this.ms.add({
             severity: 'success',
             summary: 'Appointment Added',
+            detail: res?.apt_id ? `Appointment id: ${res.apt_id}` : '',
           });
           this.ds.visible = false;
         },
@@ -68,5 +71,19 @@ export class AddPatientAptDialogComponent implements OnInit {
   onHide() {
     this.ds.form.reset();
     this.errorMessage = '';
+  }
+
+  refreshDentists() {
+    this.lns.show();
+    this.dentists = this.bes
+      .getAllDentists()
+      .pipe(finalize(() => this.lns.hide()));
+  }
+
+  refreshTypes() {
+    this.lns.show();
+    this.types = this.bes
+      .getProcedureTypes()
+      .pipe(finalize(() => this.lns.hide()));
   }
 }

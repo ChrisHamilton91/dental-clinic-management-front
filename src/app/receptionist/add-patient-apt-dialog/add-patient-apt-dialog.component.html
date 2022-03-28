@@ -14,10 +14,10 @@
           id="add-patient-apt-dialog-dentist_id"
           [style]="{ width: '100%' }"
           placeholder="Pick Dentist"
-          [options]="dentists"
+          [options]="(dentists | async) || []"
           formControlName="dentist_id"
-          optionLabel="name"
-          optionValue="id"
+          optionLabel="dentist_name"
+          optionValue="dentist_id"
           appendTo="body"
         ></p-dropdown>
         <div class="p-error error-container">
@@ -81,7 +81,9 @@
           id="add-patient-apt-dialog-type"
           [style]="{ width: '100%' }"
           placeholder="Pick Type"
-          [options]="types"
+          [options]="(types | async) || []"
+          optionValue="type"
+          optionLabel="type"
           formControlName="type"
           appendTo="body"
         ></p-dropdown>
@@ -92,14 +94,12 @@
       <!-- room -->
       <div class="form-control">
         <label for="add-patient-apt-dialog-room">Room</label>
-        <p-dropdown
+        <input
           id="add-patient-apt-dialog-room"
-          [style]="{ width: '100%' }"
-          placeholder="Pick Room"
-          [options]="rooms"
+          type="text"
+          pInputText
           formControlName="room"
-          appendTo="body"
-        ></p-dropdown>
+        />
         <div class="p-error error-container">
           {{ ds.getErrorMessage("room") }}
         </div>

@@ -113,28 +113,14 @@ export class BackendService {
     patient_id: number,
     dentist_id: number,
     apt_info: IAppointmentInfo
-  ) {
-    console.log(
-      'Adding appointment for patient: ',
-      patient_id,
-      'and dentist: ',
-      dentist_id,
-      ' with: ',
-      apt_info
+  ): Observable<{ apt_id: number }> {
+    return this.http.put<{ apt_id: number }>(
+      this.baseUrl + '/add-dentist-appointment',
+      { ...apt_info, patient_id, dentist_id },
+      {
+        headers: { 'api-key': this.aks.apiKey },
+      }
     );
-    return new Observable<string>((observer) => {
-      setTimeout(() => {
-        observer.next('Appointment added! (But not really)');
-        observer.complete();
-      }, 3000);
-    });
-    // return this.http.post(
-    //   this.baseUrl + '/add-appointment',
-    //   { ...apt_info, patient_id, dentist_id },
-    //   {
-    //     headers: { 'api-key': this.aks.apiKey },
-    //   }
-    // );
   }
 
   getAllDentists(): Observable<IEmployee[]> {
@@ -147,6 +133,12 @@ export class BackendService {
           };
         });
       })
+    );
+  }
+
+  getProcedureTypes(): Observable<{ type: string }[]> {
+    return this.http.get<{ type: string }[]>(
+      this.baseUrl + '/get-procedure-types'
     );
   }
 }

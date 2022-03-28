@@ -104,8 +104,8 @@ export class AddPatientAptDialogService {
       dentist_id: this.form.controls['dentist_id'].value,
       type: this.form.controls['type'].value,
       room: this.form.controls['room'].value,
-      start_time: moment(start_time).format('YYYY-MM-DDThh:mm:00'),
-      end_time: moment(end_time).format('YYYY-MM-DDThh:mm:00'),
+      start_time: moment(start_time).format('YYYY-MM-DDTHH:mm:00'),
+      end_time: moment(end_time).format('YYYY-MM-DDTHH:mm:00'),
     };
   }
 }

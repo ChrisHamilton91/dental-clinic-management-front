@@ -4,14 +4,17 @@
   [(visible)]="ds.visible"
   [modal]="true"
 >
-  <div class="treatment-block" *ngFor="let r of ds.records | async">
-    <div class="treatment-header">
-      Appointment: {{ r.appointment_id }} Treatment
+  <ng-container *ngIf="ds.records | async">
+    <div class="treatment-block" *ngFor="let r of ds.records | async">
+      <div class="treatment-header">Appointment: {{ r.appointment_id }}</div>
+      <div><b>Type: </b>{{ r.type }}</div>
+      <div><b>Tooth: </b>{{ r.tooth }}</div>
+      <div><b>Medication: </b>{{ r.medication }}</div>
+      <div><b>Symptoms: </b>{{ r.symptoms }}</div>
+      <div><b>Comments: </b>{{ r.comments }}</div>
     </div>
-    <div>Type: {{ r.type }}</div>
-    <div>Tooth: {{ r.tooth }}</div>
-    <div>Medication: {{ r.medication }}</div>
-    <div>Symptoms: {{ r.symptoms }}</div>
-    <div>Comments: {{ r.comments }}</div>
-  </div>
+  </ng-container>
+  <ng-container *ngIf="(ds.records | async)?.length === 0">
+    <div class="treatment-header">No Treatment Records</div>
+  </ng-container>
 </p-dialog>

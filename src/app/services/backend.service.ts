@@ -211,8 +211,10 @@ export class BackendService {
           apts.map((apt) => {
             return {
               ...apt,
-              start_time: moment(apt.start_time).format('YYYY-MM-DD @ hh:mm'),
-              end_time: moment(apt.end_time).format('YYYY-MM-DD @ hh:mm'),
+              start_time: moment(apt.start_time)
+                .utc()
+                .format('YYYY-MM-DD @ HH:mm'),
+              end_time: moment(apt.end_time).utc().format('YYYY-MM-DD @ HH:mm'),
             };
           })
         )
@@ -232,8 +234,10 @@ export class BackendService {
           apts.map((apt) => {
             return {
               ...apt,
-              start_time: moment(apt.start_time).format('YYYY-MM-DD @ hh:mm'),
-              end_time: moment(apt.end_time).format('YYYY-MM-DD @ hh:mm'),
+              start_time: moment(apt.start_time)
+                .utc()
+                .format('YYYY-MM-DD @ HH:mm'),
+              end_time: moment(apt.end_time).utc().format('YYYY-MM-DD @ HH:mm'),
             };
           })
         )
@@ -241,55 +245,11 @@ export class BackendService {
   }
 
   getPatientTreatments(patient_id: number): Observable<Treatment[]> {
-    return new Observable<Treatment[]>((observer) => {
-      observer.next([
-        {
-          id: 1,
-          patient_id: 2,
-          hygienist_id: undefined,
-          dentist_id: 3,
-          type: 'type',
-          medication: 'medication',
-          symptoms: 'symptoms',
-          comments:
-            'comments comments comments comments comments comments comments comments comments comments comments comments',
-          appointment_id: 24,
-          tooth: '23',
-        },
-        {
-          id: 1,
-          patient_id: 2,
-          hygienist_id: undefined,
-          dentist_id: 3,
-          type: 'type',
-          medication: 'medication',
-          symptoms: 'symptoms',
-          comments:
-            'comments comments comments comments comments comments comments comments comments comments comments comments',
-          appointment_id: 25,
-          tooth: '23',
-        },
-        {
-          id: 1,
-          patient_id: 2,
-          hygienist_id: undefined,
-          dentist_id: 3,
-          type: 'type',
-          medication: 'medication',
-          symptoms: 'symptoms',
-          comments:
-            'comments comments comments comments comments comments comments comments comments comments comments comments',
-          appointment_id: 26,
-          tooth: '23',
-        },
-      ]);
-      observer.complete();
-    });
-    // return this.http.get<Treatment[]>(
-    //   this.baseUrl + '/get-patient-treatments/' + patient_id,
-    //   {
-    //     headers: { 'api-key': this.aks.apiKey },
-    //   }
-    // );
+    return this.http.get<Treatment[]>(
+      this.baseUrl + '/get-patient-treatments/' + patient_id,
+      {
+        headers: { 'api-key': this.aks.apiKey },
+      }
+    );
   }
 }

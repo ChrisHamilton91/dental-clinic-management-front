@@ -2,7 +2,7 @@
   <div class="table-container">
     <p-table [value]="(appointments | async) || []" [rowHover]="true">
       <ng-template pTemplate="caption">
-        <div class="table-header">
+        <div class="table-header" style="display: flex">
           <span>Appointments For Dentist: </span>
           <span style="width: 2rem"></span>
           <p-dropdown
@@ -16,6 +16,8 @@
             appendTo="body"
             (ngModelChange)="getAppointments($event)"
           ></p-dropdown>
+          <div style="flex-grow: 1"></div>
+          <span>Dentist ID: {{ dentist_id || "00" }}</span>
         </div>
       </ng-template>
 
